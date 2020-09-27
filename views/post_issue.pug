@@ -1,0 +1,17 @@
+
+-var name = project.name
+
+form(action=`/projects/:${name}`, method="post")
+    h3 Create New Issue to #{name}
+    h4= success
+    input(type="text" name="title" placeholder="*Issue Title" required)
+    br
+    textarea(name="text" placeholder="*Issue Text" required)
+    br
+    input(type="text" name="creator" placeholder="*Created by" required)
+    br
+    input(type="text" name="assigned_to" placeholder="(Opt)Assigned to")
+    br
+    input(type="text" name="status" placeholder="(Opt)Status")
+    br
+    button(type="submit" class="button-primary") Submit Issue

@@ -4,7 +4,11 @@ html(lang="en")
     body
         include ./header.pug 
 
-        //- include ./projectList.pug
+        include ./post_issue.pug
         h3= project.name
         p= project.description
-        p= project.issues.length
+        ul
+            each val in project.issues
+                li
+                    <b> #{val.issue_title} </b>
+                    p= val.issue_text
