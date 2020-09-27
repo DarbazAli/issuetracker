@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const projectsRoute = require('./routes/projectsRoute');
 const { MongoClient } = require('mongodb');
 const issueRoute = require('./routes/issueRoute');
@@ -22,7 +23,7 @@ app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use(methodOverride('_method'))
 
 
 MongoClient

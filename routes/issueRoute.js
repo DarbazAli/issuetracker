@@ -38,11 +38,30 @@ module.exports = (app, db) => {
 
 
 
-            db.findOneAndUpdate({name: project}, {$push: {issues: newIssue}}, (err, doc) => {
-                if ( err ) console.log(err);
-                // console.log(doc);
-                res.redirect(`/projects/:${project}`)
-            })
+            db.findOneAndUpdate({name: project}, 
+                    {$push: {issues: newIssue}}, 
+                    (err, doc) => {
+                        if ( err ) console.log(err);
+                        // console.log(doc);
+                        res.redirect(`/projects/:${project}`)
+                    })
 
         }) // END OF POST
+
+        // UPDATE
+        .delete( (req, res) => {
+            let project =  req.params.project;
+            project = project.replace(':', '');
+            const id = new ObjectID( req.body.id );
+            // log(id)
+
+           db.updateOne(
+               { name: project },
+               { $pull: { issues: { _id: id }}},
+               {new: true}
+           )
+           .then( data => res.redirect(`/projects/:${project}`))
+           .catch( err => log(err))
+        
+        })
 }

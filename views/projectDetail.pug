@@ -12,3 +12,8 @@ html(lang="en")
                 li
                     <b> #{val.issue_title} </b>
                     p= val.issue_text
+                    p= val._id
+
+                    form(method="post" action=`/projects/:${project.name}?_method=DELETE`, )
+                        input(type="hidden", name="id" value=`${val._id}`)
+                        button(type="submit") Delete
