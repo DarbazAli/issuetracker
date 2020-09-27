@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const projectsRoute = require('./routes/projectsRoute');
 const { MongoClient } = require('mongodb');
+const issueRoute = require('./routes/issueRoute');
 
 const app = express();
 require('dotenv').config();
@@ -42,6 +43,7 @@ MongoClient
             })
 
         projectsRoute(app, projects)
+        issueRoute(app, projects);
 
     })
     .catch( error => log(error))

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+html(lang="en")
+    include ./head.pug
+    body
+        include ./header.pug 
+
+        //- include ./projectList.pug
+        h3= project.name
+        p= project.description
+        p= project.issues.length
