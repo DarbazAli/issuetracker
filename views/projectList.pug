@@ -1,0 +1,12 @@
+div
+    h1 Project
+    if projects 
+        ul
+            each list in projects
+                - var name= list.name
+                - var issues= list.issues.length
+                li
+                    a(href=`/projects/:${name}`) #{name}
+                    p= list.description
+                    p #{issues} Open Issues
+                        
