@@ -22,9 +22,7 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app
-    .route('/')
-    .get( (req, res) => res.render('index'))
+
 
 MongoClient
     .connect(MONGO_URI, { useUnifiedTopology: true})
@@ -32,6 +30,16 @@ MongoClient
         log('Connected to database')
         const db = client.db('issuetracker');
         const projects = db.collection('projects');
+
+        app
+            .route('/')
+            .get( (req, res) => {
+                projects.find().toArray((err, data) => {
+                    if ( err ) log(err);
+                    // log(data)
+                    res.render('index', {projects: data})
+                })
+            })
 
         projectsRoute(app, projects)
 

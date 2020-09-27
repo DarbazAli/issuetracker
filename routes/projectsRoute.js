@@ -23,4 +23,12 @@ module.exports = (app, db) => {
                 })
                 
         })
+
+        .get( (req, res) => {
+            db.find().toArray((err, data) => {
+                if ( err ) log(err);
+                // log(data)
+                res.render('projects', {projects: data})
+            })
+        })
 }
